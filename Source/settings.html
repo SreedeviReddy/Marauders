@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-3.1.1.min.js"></script>
+<script>
+   $(document).ready(function(){
+      $("#sub").click(function(){
+       
+		  var user_id = "temp";
+          user_id = window.localStorage.getItem('user_id');	  
+          var pass=  $("#pass").val();
+          var dataString = '&user_id='+ user_id + '&pass='+ pass ;
+          if(pass=='')
+            {
+              alert("Please fill to continue.");
+            }
+          else
+            {
+              $.ajax({
+                      type: "POST",
+                      url: "http://172.19.18.117/proj/settings.php",
+                      data: dataString,
+                      cache: false,
+				
+                      success: function(result){
+                        if(result == 'notdone')
+                        {
+                          alert("Not able to change password");
+                        }
+                        else if(result == 'changed')
+                        {
+                          alert("Success! password changed");
+                        }
+                                                },
+                        error: function(data){
+                          
+                          alert("Not able to connect to server");
+                               }
+                      });
+             }
+                      return false;
+              });
+          });
+		  
+  </script>
+  <script>
+   $(document).ready(function(){
+      $("#sub1").click(function(){
+       
+		  var user_id = "temp";
+          user_id = window.localStorage.getItem('user_id');	  
+          var addr=  $("#addr").val();
+          var dataString = '&user_id='+ user_id + '&addr='+ addr ;
+          if(addr=='')
+            {
+              alert("Please fill to continue.");
+            }
+          else
+            {
+              $.ajax({
+                      type: "POST",
+                      url: "http://172.19.18.117/proj/address.php",
+                      data: dataString,
+                      cache: false,
+				
+                      success: function(result){
+                        if(result == 'notdone')
+                        {
+                          alert("Not able to change address");
+                        }
+                        else if(result == 'changed')
+                        {
+                          alert("Success! address changed");
+                        }
+                                                },
+                        error: function(data){
+                          
+                          alert("Not able to connect to server");
+                               }
+                      });
+             }
+                      return false;
+              });
+          });
+		  
+  </script>
+  <script>
+   $(document).ready(function(){
+      $("#sub2").click(function(){
+       
+		  var user_id = "temp";
+          user_id = window.localStorage.getItem('user_id');	  
+          var Email=  $("#Email").val();
+          var dataString = '&user_id='+ user_id + '&Email='+ Email ;
+          if(Email=='')
+            {
+              alert("Please fill to continue.");
+            }
+          else
+            {
+              $.ajax({
+                      type: "POST",
+                      url: "http://172.19.18.117/proj/email.php",
+                      data: dataString,
+                      cache: false,
+				
+                      success: function(result){
+                        if(result == 'notdone')
+                        {
+                          alert("Not able to change address");
+                        }
+                        else if(result == 'changed')
+                        {
+                          alert("Success! address changed");
+                        }
+                                                },
+                        error: function(data){
+                          
+                          alert("Not able to connect to server");
+                               }
+                      });
+             }
+                      return false;
+              });
+          });
+		  
+  </script>
+  <script>
+   $(document).ready(function(){
+      $("#sub3").click(function(){
+       
+		  var user_id = "temp";
+          user_id = window.localStorage.getItem('user_id');	  
+          var contact=  $("#contact").val();
+          var dataString = '&user_id='+ user_id + '&contact='+ contact ;
+          if(contact=='')
+            {
+              alert("Please fill to continue.");
+            }
+          else
+            {
+              $.ajax({
+                      type: "POST",
+                      url: "http://172.19.18.117/proj/contact.php",
+                      data: dataString,
+                      cache: false,
+				
+                      success: function(result){
+                        if(result == 'notdone')
+                        {
+                          alert("Not able to change contact");
+                        }
+                        else if(result == 'changed')
+                        {
+                          alert("Success! contact changed");
+                        }
+                                                },
+                        error: function(data){
+                          
+                          alert("Not able to connect to server");
+                               }
+                      });
+             }
+                      return false;
+              });
+          });
+		  
+  </script>
+<style> body{background-color: #B4CDCD}
+</style>
+<style type="text/css">
+.picture {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+
+  display: block;
+  background-image: url("office.png");
+  width: 1400px;
+  height: 800px;
+
+  -webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -o-filter: blur(3px);
+  -ms-filter: blur(3px);
+  filter: blur(3px);
+}
+form
+{
+	position:absolute;
+	top:30px;
+	right:300px;
+	left:300px;
+	bottom:300px;
+}
+
+ul {
+    
+    position:relative;
+    top:120px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    height:300px;
+    background-color: #959d9a;
+    border: 4px solid #6e7773;
+    border-radius:3px;
+    text-align:center;
+	font-size:15px;
+	font-weight:bold;
+	
+    
+}
+
+li a {
+    font-family:Avantgarde, sans-serif;
+	display: block;
+    color:#252826;
+    padding: 17px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color on hover */
+li a:hover {
+    background-color: #555;
+     color: white;
+	 transition-duration:0.4s;
+}
+	
+</style>
+</head>
+<body>
+<img src="office.png" class="picture">
+		<ul>
+			<li ><a href="Attendance.html">Attendance</a></li>
+			<li><a href="Leave.html">Leave</a></li>
+			<li><a href="viewnote.html">Notification</a></li>
+			<li><a href="Guide.html">Guide</a></li>
+			<li><a href="settings.html">Settings</a></li>
+			<li><a href="logout.html">Logout</a></li>
+		</ul>
+<form style="font-size:120%;text-align:center"  method="POST">
+<br><br><br>
+<font size="5">Change password:</font><br>
+Enter new password:
+<input type="password" name="pass" id="pass">
+<br>
+confirm password:<input type="password" name="pass1" id="pass1" ><br>
+<button type="submit" id="sub" name="sub">submit</button>
+<br><br>
+Address Updation : <br>
+<textarea rows="3" cols="50" name="addr" id="addr" placeholder="Enter address here...">
+</textarea><br>
+<button type="submit" id="sub1" name="sub1">submit</button>
+<br><br>
+email Updation : <br>
+<textarea rows="1" cols="50" id="Email" name="Email" placeholder="Enter new mail id here...">
+</textarea><br>
+<button type="submit" id="sub2" name="sub2">submit</button>
+<br><br>
+Contact no : <br>
+<textarea rows="1" name="contact" id="contact" cols="50" name="contact" placeholder="Enter contact details here...">
+</textarea><br>
+<button type="submit" name="sub3" id="sub3" >submit</button>
+</form>
+</div>
+</body>
+</html>
+
+
+		

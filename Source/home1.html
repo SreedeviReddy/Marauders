@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+      var user_id = "temp";
+      user_id = window.localStorage.getItem('user_id');
+      var dataString = 'user_id='+ user_id;
+      $.ajax({
+                      type: "POST",
+                      url: "http://172.19.18.117/proj/home.php",
+                      data: dataString,
+                      cache: false,
+                      success: function(result){
+                      if(result == 'Invalid')
+                        {
+                          alert("Incorrect Values");
+                        }
+                        else
+                        {
+                          var user = JSON.parse(result);
+						  //alert(result);
+                          var details = '<ul align="left">'
+										+'<li>Name:'+ user.name+'</li>'
+										+'<li>Email:'+user.Email+'</li>'
+										+'<li>Address:'+user.addr+'</li>'
+										+'<li>Contact:'+user.contact+' </li>'
+										+'<li>DOB: '+user.DOB+'</li>'
+										+'<li>Gender:'+user.gender+'</li>'
+									+'</ul>';
+                          $('#left').append(details);
+                        }
+                                                },
+                        error: function(data){
+                          
+                          alert("Unsufficient details. Not able to connect to server");
+                               }
+                      });
+});
+</script>
+<style>
+body{background-color:#AAB49F}
+</style>
+
+<style type="text/css">
+#left {
+  float:left;
+  width:25%;
+  height: 41em;
+  margin:1px .2em 1px 1px;
+  border: 2px solid black;
+  background-color:#589410;
+  font-family:avantgarde, sans-serif;
+  padding:10px;
+  box-shadow: 5px 5px 20px black;
+  text-align:center;  
+   
+  
+}
+#content {
+  margin:1px .2em 1px 28%;
+  background-color:#589410;
+}
+#cnt1 {
+  position;relative;
+  margin:.3em 2px;
+  height: 10em;
+  border: 2px solid black;
+  background-color:#1DF707;
+  background-image:url('bag.jpg');
+box-shadow: 5px 5px 20px black;  
+}
+#cnt2 {
+  position;relative;
+  margin:.3em 2px;
+  height: 30em;
+  border: 2px solid black;
+  background-color:#589410;
+ 
+  box-shadow: 5px 5px 20px black;
+  
+}
+ul{
+	list-style-type: none;
+	width:300px;
+
+}
+li a{
+	font-family:avantgarde, sans-serif;
+	display: block;
+	text-decoration: none;
+	color:#252826;
+	font-size:28px;
+	padding:5px;
+	
+}
+li a:hover {
+    background-color: #555;
+     color: white;
+	 transition-duration:0.4s;
+}
+body{
+background-color:#AAB49F;
+}
+.picture {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+
+  display: block;
+  background-image: url("office.png");
+  width: 400px;
+  height: 200px;
+
+  -webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -o-filter: blur(3px);
+  -ms-filter: blur(3px);
+  filter: blur(3px);
+}
+</style>
+	
+</head>
+
+<body>
+
+<div id="left"><h2>Details of the USER</h2>
+
+
+		
+
+
+</div>
+<div id="content">
+
+  <div id="cnt1">
+  
+
+  </div>
+  <div id="cnt2">
+  <ul>
+    <li><a href="leave.html">Leave</a></li>
+	<li><a href="leave1.html">Approve/Reject Leaves</a></li>
+	<li><a href="leavestatus.html">Leave status</a></li>
+    <li><a href="attendance.html">Attendance</a></li>
+    <li><a href="Notifications.html">Create Notifications</a></li>
+	<li><a href="viewnote.html.html">View Notifications</a></li>
+    <li><a href="guide.html">Help</a></li>
+	<li><a href="settings.html">Settings</a></li>
+	<li><a href="salary.html">Salary</a></li>
+	<li><a href="logout.html">Logout</a></li>
+  </ul></div>
+</div>
+<br style="clear:both;" />
+</body>
+
+</html>

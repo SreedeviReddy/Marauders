@@ -1,0 +1,209 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-3.1.1.min.js"></script>
+<script>
+   $(document).ready(function(){
+      $("#submit").click(function(){
+          //var getvar = "temp";
+          var name = $("#name").val();
+		  var user_id = $("#user_id").val();
+          var password = $("#password").val();
+          var role_id = $("#role_id").val();
+		  var addr = $("#addr").val();
+		  var phone = $("#phone").val();
+		  var DOB = $("#DOB").val();
+		  var email= $("#email").val();
+		  var gender=$("#gender").val();
+		  var password1=$("#password1").val();
+		 
+          var dataString = 'user_id='+ user_id + '&addr='+ addr + '&name='+ name+ '&phone='+ phone + '&DOB='+ DOB +  '&email='+ email + '&gender='+ gender + '&password='+ password +  '&role_id='+ role_id;
+		  if(user_id==''||password==''||role_id=='')
+            {
+              alert("Please fill all the fields to continue.");
+            }
+          else
+            {
+              $.ajax({
+                      type: "POST",
+                      url: "http://172.19.18.117/proj/register.php",
+                      data: dataString,
+                      cache: false,
+                      success: function(result){
+                    
+                      if(result == 'Invalid')
+                        {
+                          alert("Invalid Credentials. Please Try Again.");
+                        }
+                        else
+                        {
+                          window.localStorage.setItem('user_id', user_id);
+                          //getvar = window.localStorage.getItem('user_id');
+                          //alert(getvar);
+                          //window.localStorage.setItem('isLoggedIn', 'true');
+						  window.location.href = "index.html";
+                          
+						  
+                        }
+                                                },
+                        error: function(data){
+                          
+                          alert("Not able to connect to server");
+                               }
+                      });
+             }
+                      return false;
+              });
+          });
+  </script>
+<meta name="viewport" content="width=device-width">
+<style>
+body{
+	background-color: #c1cebb;
+}
+.form{
+
+    background-color: #a2a68c;
+	width:470px;
+	margin:0 auto;
+	padding-left:50px;
+	padding-top:20px;
+	
+
+}
+
+.form fieldset{border:0px; padding:0px; margin:0px;}
+
+.form p.contact { font-size: 12px; margin:0px 0px 10px 0;line-height: 14px; font-family:Arial, Helvetica;}
+
+ 
+
+.form input[type="text"] { width: 400px; }
+
+.form input[type="email"] { width: 400px; }
+
+.forminput[type="password"] { width: 400px; }
+
+.form input.birthday{width:60px;}
+
+.form input.birthyear{width:120px;}
+
+.form label { color: #000; font-weight:bold;font-size: 12px;font-family:Arial, Helvetica; }
+
+.form label.month {width: 135px;}
+
+.form input, textarea { background-color: rgba(255, 255, 255, 0.4); border: 1px solid rgba(122, 192, 0, 0.15); padding: 7px; font-family: Keffeesatz, Arial; color: #4b4b4b; font-size: 14px; -webkit-border-radius: 5px; margin-bottom: 15px; margin-top: -10px; }
+
+.form input:focus, textarea:focus { border: 1px solid #ff5400; background-color: rgba(255, 255, 255, 1); }
+
+.form .select-style {
+
+  -webkit-appearance: button;
+
+  -webkit-border-radius: 2px;
+
+  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+
+  -webkit-padding-end: 20px;
+
+  -webkit-padding-start: 2px;
+
+  -webkit-user-select: none;
+
+  background-image: url(images/select-arrow.png),
+
+    -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+
+  background-position: center right;
+
+  background-repeat: no-repeat;
+
+  border: 0px solid #FFF;
+
+  color: #555;
+
+  font-size: inherit;
+
+  margin: 0;
+
+  overflow: hidden;
+
+  padding-top: 5px;
+
+  padding-bottom: 5px;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;}
+
+.form .gender {
+width:410px;
+  }
+.form input.buttom{ background: #4b8df9; display: inline-block; padding: 5px 10px 6px; color: #fbf7f7; text-decoration: none; font-weight: bold; line-height: 1; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; -moz-box-shadow: 0 1px 3px #999; -webkit-box-shadow: 0 1px 3px #999; box-shadow: 0 1px 3px #999; text-shadow: 0 -1px 1px #222; border: none; position: relative; cursor: pointer; font-size: 14px; font-family:Verdana, Geneva, sans-serif;}
+.form input.buttom:hover    { background-color: #2a78f6; }
+
+.picture {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+
+  display: block;
+  background-image: url("office.png");
+  width: 1400px;
+  height: 800px;
+
+  -webkit-filter: blur(4px);
+  -moz-filter: blur(4px);
+  -o-filter: blur(4px);
+  -ms-filter: blur(4px);
+  filter: blur(4px);
+}
+
+</style>
+</head>
+<body>
+<img src="office.png" class="picture">
+ <div  class="form">
+            <form id="contactform" method="POST">
+                <p class="contact"><label for="name">Name</label></p>
+                <input id="name" name="name" placeholder="First and last name" required="" tabindex="1" type="text">
+                <p class="contact"><label for="email">Email</label></p>
+                <input id="email" name="email" placeholder="example@domain.com" required="" type="email">
+                <p class="contact"><label for="username">Create an userid</label></p>
+                <input id="user_id" name="user_id" placeholder="userid" required="" tabindex="2" type="text">
+                <p class="contact"><label for="password">Create a password</label></p>
+                <input type="password" id="password" name="password" required="" type="text">
+                <p class="contact"><label for="repassword">Confirm your password</label></p>
+                <input type="password" id="password1" name="password1" required="" type="text">
+               <p>Enter DOB
+			   <input type="date" id="DOB" name="DOB" required="">
+			   </p>
+                 <select class="select-style gender" name="gender" id="gender">
+           <option value="select">Gender</option>
+            <option value="m">Male</option>
+			<option value="f">Female</option>
+            <option value="others">Other</option>
+ </select><br><br>
+ <select class="select-style gender" name="role_id" id="role_id">
+
+            <option value="manager">Manager</option>
+			<option value="employee">Employee</option>
+ </select><br><br>
+ <p class="contact"><label for="phone">Mobile phone</label></p>
+ <input id="phone" name="phone" placeholder="phone number" required="" type="text"> <br>
+ <p class="address"><label for="address">Enter Residential Address</label></p>
+ <textarea rows="4" cols="50" id="addr" name="addr"></textarea>
+<input class="buttom" name="submit" id="submit" tabindex="5" value="Sign me up!" type="submit">   
+ </form>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+

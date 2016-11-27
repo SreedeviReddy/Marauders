@@ -1,0 +1,131 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-3.1.1.min.js"></script>
+<script>
+   $(document).ready(function(){
+      $.ajax({
+                      type: "POST",
+                      url: "http://172.19.18.117/proj/getnot.php",
+                      cache: false,
+                      success: function(result){
+                      if(result == 'Invalid')
+                        {
+                          alert("Incorrect Values");
+                        }
+                        else
+                        {
+                          var note = JSON.parse(result);
+                         // alert(products.length);
+                          //console.log(result)
+                          if(note.length > 0)
+                          {
+                            for(i in note)
+                            {
+                              var display = '<tr>'
+											+'<td>'+note[i].date+'</td>'
+											+'<td>'+note[i].notify+'</td>'
+											+'</tr>'; 
+                            $('#table_data').append(display);
+                           }
+                          }
+                          else
+                          {
+                            var display = '<tr>'
+											+'<td>No Data</td>'
+											+'<td>N  Data</td>'
+											+'</tr>'; 
+                            $('#table_data').append(display);
+                          }
+                        }
+                                                },
+                        error: function(data){
+                          alert("Unsufficient details. Not able to connect to server");
+                               }
+                      });
+
+          });
+  </script>
+<meta charset="utf-8">
+<style>
+body
+{
+background-color:#ADD8E6;
+}
+.picture {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+
+  display: block;
+  background-image: url("office.png");
+  width: 1400px;
+  height: 800px;
+
+  -webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -o-filter: blur(3px);
+  -ms-filter: blur(3px);
+  filter: blur(3px);
+}
+ul {
+    
+    position:relative;
+    top:120px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    height:300px;
+    background-color: #959d9a;
+    border: 4px solid #6e7773;
+    border-radius:3px;
+    text-align:center;
+	font-size:15px;
+	font-weight:bold;
+	
+    
+}
+
+li a {
+    font-family:Avantgarde, sans-serif;
+	display: block;
+    color:#252826;
+    padding: 17px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color on hover */
+li a:hover {
+    background-color: #555;
+     color: white;
+	 transition-duration:0.4s;
+}
+.abc{
+ }
+
+</style>
+</head>
+<body>
+  <img src="office.png" class="picture">
+<div style="font-size:160%;text-align:center">
+<form method="POST">
+Notifications:
+<center>
+<table border=1 align="center" style="height:70%;width:50%;background-color:#FFFFFF;font-size:100%" class="abc">
+    <thead>
+      <tr>
+        <th>Date.</th>
+        <th>Notifications</th>
+      </tr>
+    </thead>
+    <tbody id="table_data">
+    </tbody>
+  </table>
+</center>
+<br>
+</form>
+</div>
+</body>
+</html>

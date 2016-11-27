@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width">
+<script>
+   $(document).ready(function(){
+      $("#sub").click(function(){
+		  var user_id = "temp";
+          user_id = window.localStorage.getItem('user_id');
+          var Email= $("#Email").val();
+		  alert(user_id);
+          var dataString = 'user_id='+ user_id + '&Email'+ Email;
+          if(Email=='')
+            {
+              alert("Please fill to continue.");
+            }
+          else
+            {
+              $.ajax({
+                      type: "POST",
+                      url: "http://172.19.18.117/proj/error.php",
+                      data: dataString,
+                      cache: false,
+                      success: function(result){
+                    
+                      if(result == 'Invalid')
+                        {
+                          alert("Invalid Credentials. Please Try Again.");
+                        }
+                        else
+                        {
+                           alert("New password sent to your registered mail");
+                          
+						  
+                        }
+                                                },
+                        error: function(data){
+                          
+                          alert("Not able to connect to server");
+                               }
+                      });
+             }
+                      return false;
+              });
+          });
+  </script>
+<title>Error</title>
+<style>
+body{background-color:#d7dfd3;}
+</style>
+<style type="text/css">
+#outPopUp {
+  position: absolute;
+  width: 360px;
+  height: 190px;
+  z-index: 15;
+  top: 380px;
+  left: 44.5%;
+  margin: -100px 0 0 -100px;
+  background-color: #c1cebb;
+  border-radius:5px;
+  border:3px solid #485940;
+  box-shadow: 10px 10px 10px #888888;
+  
+}
+form{
+	font-size:20px;
+	font-family:avantgarde, sans-serif;
+	padding:10px;
+	color:#252826;
+	
+}
+.submit1{
+	position:absolute;
+	top:157px;
+	left:276px;
+	border-radius:4px;
+	background-color:  #a1b497;
+	border:2px solid #485940;
+	box-shadow: 2px 2px 5px black;
+	
+	
+}
+.submit1:hover{
+	color:white;
+	background-color: #555;
+	transition-duration:0.4s;
+}
+.submit{
+	position:absolute;
+	top:60px;
+	left:276px;
+	border-radius:4px;
+	background-color:  #a1b497;
+	border:2px solid #485940;
+	box-shadow: 2px 2px 5px black;
+	
+	
+}
+.submit:hover{
+	color:white;
+	background-color: #555;
+	transition-duration:0.4s;
+}
+img {
+    position: absolute;
+    left:638px;
+    
+}
+</style>
+</head>
+<body>
+<img src="error.png" alt="error image" height="256px" width="256px">
+<div id="outPopUp">
+
+<form>
+<b>Reset password</b> <br />
+Enter Email:<input type="Email" name="Email" id="Email">
+<button class="submit" id="sub" name="sub">submit</button>
+<br />
+<br />
+Enter new password:<input type="password" name="pass">
+<br />
+<br />
+<button class="submit1" name="sub1" id="sub1">submit</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<html>
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(e){
+		var user_id = "temp";
+          user_id = window.localStorage.getItem('user_id');
+		  var dataString = 'user_id='+ user_id;
+      $.ajax({
+                      type: "POST",
+                      url: "http://localhost/proj/geteavesUser.php",
+					  data: dataString,
+                      cache: false,
+                      success: function(result){
+                          //alert(result);
+                          var data = JSON.parse(result);
+                          if(data.length > 0)
+                          {
+                            for(i in data)
+                            {
+                              var display = //'<div id="eachtable">'
+											'<tr id="eachtable">'
+											+'<td><label>'+data[i].leaveid+'</label></td>'
+											+'<td>'+data[i].userid+'</td>'
+											+'<td>'+data[i].from+'</td>'
+											+'<td>'+data[i].to+'</td>'
+											+'<td>'+data[i].status+'</td>'
+											+'</tr>';
+											//+'</div>';
+                            $('#table_data').append(display);
+                           }
+                          }
+                          else
+                          {
+                            var display = '<tr>'
+											+'<td>No Data</td>'
+											+'<td>No Data</td>'
+											+'<td>No Data</td>'
+											+'<td>No Data</td>'
+											+'<td>No Data</td>'
+											+'</tr>'
+                            $('#table_data').append(display);
+                          }
+                                                },
+                        error: function(data){
+                          alert("Unsufficient details. Not able to connect to server");
+                               }
+                      });
+    });
+</script>
+
+<head>
+<style>
+.picture {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+
+  display: block;
+  background-image: url("office.png");
+  width: 1400px;
+  height: 800px;
+
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+ul {
+    
+    position:relative;
+    top:120px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    height:300px;
+    background-color: #959d9a;
+    border: 4px solid #6e7773;
+    border-radius:3px;
+    text-align:center;
+	font-size:15px;
+	font-weight:bold;
+	
+    
+}
+
+li a {
+    font-family:Avantgarde, sans-serif;
+	display: block;
+    color:#252826;
+    padding: 17px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color on hover */
+li a:hover {
+    background-color: #555;
+     color: white;
+	 transition-duration:0.4s;
+}
+</style>
+</head>
+<body>
+<img src="office.png" class="picture">
+<center>
+<h1>Pending Leaves</h1>
+<table border=1 style="height:70%;width:50%;background-color:#FFFFFF;font-size:100%">
+    <thead>
+      <tr>
+        <th>LeaveId.</th>
+        <th>Username</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="table_data">
+    </tbody>
+  </table>
+</center>
+</body>
+</html>

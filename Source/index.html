@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta name="viewport" content="width=device-width">
+
+
+<script src="js/jquery-3.1.1.min.js">
+</script>
+
+<script>
+
+   $(document).ready(function(){
+
+      $("#submit").click(function(){
+
+          //var getvar = "temp";
+
+          var user_id = $("#user_id").val();
+
+          var password = $("#password").val();
+
+          var role_id = $("#role_id").val();
+
+          var dataString = 'user_id='+ user_id + '&password='+ password + '&role_id='+ role_id;
+
+          if(user_id==''||password==''||role_id=='')
+
+            {
+              alert("Please fill all the fields to continue.");
+
+            }
+          
+	  else
+
+            {
+
+              $.ajax({
+
+                      type: "POST",
+
+                      url: "http://172.19.18.117/proj/login.php",
+
+                      data: dataString,
+
+                      cache: false,
+
+                      success: function(result){
+
+                    
+                      if(result == 'Invalid')
+
+                        		  {
+
+			                          alert("Invalid Credentials. Please Try Again.");
+
+		                          }
+
+		                          else
+
+		                          {
+
+			                          window.localStorage.setItem('user_id', user_id);
+
+          			                //getvar = window.localStorage.getItem('user_id');
+ 
+			                         //alert(getvar);
+			
+                          //window.localStorage.setItem('isLoggedIn', 'true');
+
+						 if(role_id=='Manager')
+
+						  { window.location.href = "home1.html";}
+
+			                          if(role_id=='Employee')
+
+						  {window.location.href = "home2.html";}
+
+                       			  }
+
+            },
+ 
+                       error: function(data)
+			{
+ 
+                         
+                          alert("Not able to connect to server");
+
+                        }
+
+                      });
+
+             }
+
+                      return false;
+
+              });
+
+          });
+  
+</script>
+
+<meta charset="utf-8">
+
+<title>MARAUDERS</title>
+
+
+<style type="text/css">
+
+.picture {
+  position: fixed;
+  left: 0;
+  right: 0;
+top:0;
+  z-index: -1;
+
+  display: block;
+  background-image: url("office.png");
+  width: 1400px;
+  height: 1000px;
+
+  -webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -o-filter: blur(3px);
+  -ms-filter: blur(3px);
+  filter: blur(3px);
+}
+a { text-decoration: none; }
+
+h1 { font-size: 1em; }
+h1, p {
+margin-bottom: 10px;
+}
+strong {
+font-weight: bold;
+}
+.uppercase { text-transform: uppercase; }
+
+/* ---------- LOGIN ---------- */
+#login {
+margin: 50px auto;
+width: 300px;
+}
+form fieldset input[type="userid"], input[type="password"] {
+background-color: #e5e5e5;
+border: none;
+border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+color: #00CED1;
+font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+font-size: 14px;
+height: 50px;
+outline: none;
+padding: 0px 10px;
+width: 280px;
+-webkit-appearance:none;
+}
+form fieldset input[type="submit"] {
+background-color: #008dde;
+border: none;
+border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+color: #f4f4f4;
+cursor: pointer;
+font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+height: 50px;
+text-transform: uppercase;
+width: 300px;
+-webkit-appearance:none;
+}
+form fieldset a {
+color: #5a5656;
+font-size: 10px;
+}
+form fieldset a:hover { text-decoration: underline; }
+.btn-round {
+background-color: #5a5656;
+border-radius: 50%;
+-moz-border-radius: 50%;
+-webkit-border-radius: 50%;
+color: #f4f4f4;
+display: block;
+font-size: 12px;
+height: 50px;
+line-height: 50px;
+margin: 30px 125px;
+text-align: center;
+text-transform: uppercase;
+width: 50px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<img src="office.png" class="picture">
+<div id="login">
+
+<h1><strong>Welcome.</strong> Please login.</h1>
+
+<form method="post">
+
+<fieldset>
+<p><input type="userid" class="form-control" id="user_id" name="user_id" placeholder="Enter User Id"></p>
+<p><input type="password" id="password" name="password" placeholder="Enter password"></p>
+<select  id="role_id" name="role_id">
+  <option value="Employee">Employee</option>
+  <option value="Manager">Manager</option>
+</select>
+<p><input type="submit" id="submit" value="Login"></p>
+</fieldset>
+</form>
+<a href="register.html">Click here to register</a>
+</div> <!-- end login -->
+</body>
+</html>
